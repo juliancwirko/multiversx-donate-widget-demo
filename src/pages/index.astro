@@ -1,0 +1,30 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../config";
+---
+
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <p><strong>No real money here!</strong></p>
+      <p>All works on the devnet, but it is ready for the mainnet usage!</p>
+      <p><strong>Donate 0.5 EGLD.</strong></p>
+      <div id="elrond-donate-widget-container" class="elrond-donate-widget-container"></div>
+      <button class="button" id="button-tx" style="display: none;">Send transaction</button>
+      <button class="button" id="button-login-mobile" style="display: none;">Login with Maiar mobile</button>
+      <button class="button" id="button-logout" style="display: none;">Logout</button>
+      <div id="tx-hash" class="tx-hash"></div>
+    </main>
+    <Footer />
+    <script>
+      import "./elven-init.js";
+    </script>
+  </body>
+</html>
