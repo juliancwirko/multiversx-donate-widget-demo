@@ -8,8 +8,8 @@ import {
 } from "elven.js";
 
 // UI states helper
-export const uiLoggedInState = (loggedIn) => {
-  const loginMaiarButton = document.getElementById("button-login-mobile");
+const uiLoggedInState = (loggedIn) => {
+  const loginMaiarButton = window.document.getElementById("button-login-mobile");
   const logoutButton = document.getElementById("button-logout");
   const txButton = document.getElementById("button-tx");
   if (loggedIn) {
@@ -24,7 +24,7 @@ export const uiLoggedInState = (loggedIn) => {
 };
 
 // UI spinner helper
-export const uiSpinnerState = (isLoading, button) => {
+const uiSpinnerState = (isLoading, button) => {
   const buttonLoginMobile = document.getElementById("button-login-mobile");
   const buttonEgld = document.getElementById("button-tx");
   if (isLoading) {
@@ -45,6 +45,21 @@ export const uiSpinnerState = (isLoading, button) => {
       buttonEgld.innerText = "Send predefined transaction";
       buttonEgld.removeAttribute("disabled");
     }
+  }
+};
+
+// Update the link to the Elrond explorer after the transaction is done
+const updateTxHashContainer = (txHash) => {
+  const txHashContainer = document.getElementById('tx-hash');
+  if (txHash) {
+    const url = `https://devnet-explorer.elrond.com/transactions/${txHash}`;
+    const link = document.createElement('a');
+    link.setAttribute('href', url);
+    link.classList.add('transaction-link');
+    link.innerText = url;
+    txHashContainer.appendChild(link);
+  } else {
+    txHashContainer?.querySelector('a')?.remove();
   }
 };
 
@@ -112,21 +127,6 @@ document.getElementById('button-tx').addEventListener('click', async () => {
     throw new Error(e?.message);
   }
 });
-
-// Update the link to the Elrond explorer after the transaction is done
-export const updateTxHashContainer = (txHash) => {
-  const txHashContainer = document.getElementById('tx-hash');
-  if (txHash) {
-    const url = `https://devnet-explorer.elrond.com/transactions/${txHash}`;
-    const link = document.createElement('a');
-    link.setAttribute('href', url);
-    link.classList.add('transaction-link');
-    link.innerText = url;
-    txHashContainer.appendChild(link);
-  } else {
-    txHashContainer?.querySelector('a')?.remove();
-  }
-};
 
 // Logout
 document.getElementById('button-logout').addEventListener('click', async () => {
