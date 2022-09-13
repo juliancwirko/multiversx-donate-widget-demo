@@ -81,7 +81,13 @@ blockquote {
 /* Custom styles for the demo */
 
 .elrond-donate-widget-container {
+	margin-top: 10px;
+}
+
+.elrond-donate-widget-container svg {
 	max-width: 400px;
+	border: 1px solid #999;
+	border-radius: 6px;
 }
 
 .elrond-donate-widget-container .elven-qr-code-deep-link {

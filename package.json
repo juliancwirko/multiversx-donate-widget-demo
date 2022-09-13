@@ -16,6 +16,6 @@
     "astro": "^1.1.1"
   },
   "dependencies": {
-    "elven.js": "^0.3.2"
+    "elven.js": "^0.4.0"
   }
 }
