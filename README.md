@@ -7,4 +7,4 @@ Please read the articles:
 Live demo:
 - [elrond-donate-widget-demo.netlify.app](https://elrond-donate-widget-demo.netlify.app/)
 
-Check the [elven.js](https://github.com/juliancwirko/elven.js)
+Check the [www.elvenjs.com](https://www.elvenjs.com) and [Elven.js GitHub](https://github.com/juliancwirko/elven.js)
