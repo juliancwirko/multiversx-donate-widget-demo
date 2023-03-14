@@ -80,17 +80,17 @@ blockquote {
 
 /* Custom styles for the demo */
 
-.elrond-donate-widget-container {
+.multiversx-donate-widget-container {
 	margin-top: 10px;
 }
 
-.elrond-donate-widget-container svg {
+.multiversx-donate-widget-container svg {
 	max-width: 400px;
 	border: 1px solid #999;
 	border-radius: 6px;
 }
 
-.elrond-donate-widget-container .elven-qr-code-deep-link {
+.multiversx-donate-widget-container .elven-qr-code-deep-link {
 	margin-bottom: 24px;
 	font-size: 16px;
 	display: inline-block;

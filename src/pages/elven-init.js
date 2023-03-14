@@ -9,17 +9,17 @@ import {
 
 // UI states helper
 const uiLoggedInState = (loggedIn) => {
-  const loginMaiarButton = window.document.getElementById(
+  const loginXPortalButton = window.document.getElementById(
     "button-login-mobile"
   );
   const logoutButton = document.getElementById("button-logout");
   const txButton = document.getElementById("button-tx");
   if (loggedIn) {
-    loginMaiarButton.style.setProperty('display',"none");
+    loginXPortalButton.style.setProperty('display',"none");
     logoutButton.style.setProperty('display', 'block');
     txButton.style.setProperty('display', 'block');
   } else {
-    loginMaiarButton.style.setProperty('display',"block");
+    loginXPortalButton.style.setProperty('display',"block");
     logoutButton.style.setProperty('display', 'none');
     txButton.style.setProperty('display', 'none');
   }
@@ -43,11 +43,11 @@ const uiSpinnerState = (isLoading) => {
   }
 };
 
-// Update the link to the Elrond explorer after the transaction is done
+// Update the link to the MultiversX explorer after the transaction is done
 const updateTxHashContainer = (txHash) => {
   const txHashContainer = document.getElementById("tx-hash");
   if (txHash) {
-    const url = `https://devnet-explorer.elrond.com/transactions/${txHash}`;
+    const url = `https://devnet-explorer.multiversx.com/transactions/${txHash}`;
     const link = document.createElement("a");
     link.setAttribute("href", url);
     link.setAttribute("rel", "noopener noreferrer");
@@ -62,27 +62,54 @@ const updateTxHashContainer = (txHash) => {
 
 // Init the elven.js
 const initElven = async () => {
-  const isInitialized = await ElvenJS.init({
-    apiUrl: "https://devnet-api.elrond.com",
-    chainType: "devnet",
+  await ElvenJS.init({
+    apiUrl: 'https://devnet-api.multiversx.com',
+    chainType: 'devnet',
     apiTimeout: 10000,
-    onLoggedIn: () => { uiLoggedInState(true); uiSpinnerState(false); },
-    onLoginPending: () => { uiSpinnerState(true); },
-    onLogout: () => { uiLoggedInState(false); uiSpinnerState(false); },
+    // Remember to change it. Get yours here: https://cloud.walletconnect.com/sign-in
+    walletConnectV2ProjectId: 'f502675c63610bfe4454080ac86d70e6',
+    walletConnectV2RelayAddresses: ['wss://relay.walletconnect.com'],
+    onLoginPending: () => {
+      uiSpinnerState(true);
+    },
+    onLoggedIn: () => {
+      uiLoggedInState(true);
+      uiSpinnerState(false);
+    },
+    onLogout: () => {
+      uiLoggedInState(false);
+      uiSpinnerState(false);
+      updateTxHashContainer('');
+    },
+    onTxStarted: () => {
+      uiSpinnerState(true);
+    },
+    onTxSent: (tx) => {},
+    onTxFinalized: (tx) => {
+      tx?.hash && updateTxHashContainer(tx.hash);
+      uiSpinnerState(false);
+    },
+    onTxError: (tx, error) => {
+      console.log('Error: ', error);
+    },
+    onQrPending: () => {
+      uiSpinnerState(true);
+    },
+    onQrLoaded: () => {
+      uiSpinnerState(false);
+    },
   });
-
-  uiLoggedInState(isInitialized);
 };
 
 initElven();
 
-// Login with Maiar mobile app button click listener
+// Login with xPortal Button mobile app button click listener
 document
   .getElementById("button-login-mobile")
   .addEventListener("click", async () => {
     try {
-      await ElvenJS.login("maiar-mobile", {
-        qrCodeContainerId: "elrond-donate-widget-container",
+      await ElvenJS.login("mobile", {
+        qrCodeContainer: "multiversx-donate-widget-container",
       });
     } catch (e) {
       console.log("Login: Something went wrong, try again!", e?.message);
@@ -96,7 +123,7 @@ const donatePrice = 0.5;
 
 document.getElementById("button-tx").addEventListener("click", async () => {
   updateTxHashContainer(false);
-  const demoMessage = "Elrond donate demo!";
+  const demoMessage = "MultiversX donate demo!";
 
   const tx = new Transaction({
     nonce: ElvenJS.storage.get("nonce"),
@@ -109,12 +136,9 @@ document.getElementById("button-tx").addEventListener("click", async () => {
   });
 
   try {
-    uiSpinnerState(true);
     const transaction = await ElvenJS.signAndSendTransaction(tx);
-    uiSpinnerState(false);
     updateTxHashContainer(transaction.hash);
   } catch (e) {
-    uiSpinnerState(false);
     throw new Error(e?.message);
   }
 });
