@@ -5,7 +5,7 @@ import {
   Address,
   TransactionPayload,
   TokenTransfer,
-} from "elven.js";
+} from "https://unpkg.com/elven.js@0.9.2/build/elven.js";
 
 // UI states helper
 const uiLoggedInState = (loggedIn) => {
@@ -15,13 +15,13 @@ const uiLoggedInState = (loggedIn) => {
   const logoutButton = document.getElementById("button-logout");
   const txButton = document.getElementById("button-tx");
   if (loggedIn) {
-    loginXPortalButton.style.setProperty('display',"none");
-    logoutButton.style.setProperty('display', 'block');
-    txButton.style.setProperty('display', 'block');
+    loginXPortalButton.style.setProperty("display", "none");
+    logoutButton.style.setProperty("display", "block");
+    txButton.style.setProperty("display", "block");
   } else {
-    loginXPortalButton.style.setProperty('display',"block");
-    logoutButton.style.setProperty('display', 'none');
-    txButton.style.setProperty('display', 'none');
+    loginXPortalButton.style.setProperty("display", "block");
+    logoutButton.style.setProperty("display", "none");
+    txButton.style.setProperty("display", "none");
   }
 };
 
@@ -63,12 +63,12 @@ const updateTxHashContainer = (txHash) => {
 // Init the elven.js
 const initElven = async () => {
   await ElvenJS.init({
-    apiUrl: 'https://devnet-api.multiversx.com',
-    chainType: 'devnet',
+    apiUrl: "https://devnet-api.multiversx.com",
+    chainType: "devnet",
     apiTimeout: 10000,
     // Remember to change it. Get yours here: https://cloud.walletconnect.com/sign-in
-    walletConnectV2ProjectId: 'f502675c63610bfe4454080ac86d70e6',
-    walletConnectV2RelayAddresses: ['wss://relay.walletconnect.com'],
+    walletConnectV2ProjectId: "f502675c63610bfe4454080ac86d70e6",
+    walletConnectV2RelayAddresses: ["wss://relay.walletconnect.com"],
     onLoginPending: () => {
       uiSpinnerState(true);
     },
@@ -79,7 +79,7 @@ const initElven = async () => {
     onLogout: () => {
       uiLoggedInState(false);
       uiSpinnerState(false);
-      updateTxHashContainer('');
+      updateTxHashContainer("");
     },
     onTxStarted: () => {
       uiSpinnerState(true);
@@ -90,7 +90,7 @@ const initElven = async () => {
       uiSpinnerState(false);
     },
     onTxError: (tx, error) => {
-      console.log('Error: ', error);
+      console.log("Error: ", error);
     },
     onQrPending: () => {
       uiSpinnerState(true);

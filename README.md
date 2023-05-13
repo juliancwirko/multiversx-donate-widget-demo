@@ -1,4 +1,4 @@
-# MultiversX donate widget with elven.js and Astro
+# MultiversX donate widget with elven.js
 
 Please read the articles:
 - [How to enable donations on any website using the MultiversX blockchain and EGLD tokens](https://dev.to/juliancwirko/how-to-enable-donations-on-any-website-using-the-elrond-blockchain-and-egld-tokens-3fkf)

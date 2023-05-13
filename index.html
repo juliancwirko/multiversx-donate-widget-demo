@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MultiversX donate widget with Elven.js on board!</title>
+    <link rel="stylesheet" href="/global.css">
+</head>
+
+<body>
+    <h2>Elrond donate widget with <a href="https://www.elvenjs.com">Elven.js</a> on board!</h2>
+    <main>
+        <p><strong>No real money here!</strong></p>
+        <p>All works on the devnet, but it is ready for the mainnet usage!</p>
+        <p>For using it you would need a <a href="https://xPortal.com/" target="_blank" rel="noopener"
+                rel="noreferrer">xPortal mobile app</a></p>
+        <p>Read more about it in the <a
+                href="https://dev.to/juliancwirko/how-to-enable-donations-on-any-website-using-the-elrond-blockchain-and-egld-tokens-3fkf"
+                target="_blank" rel="noopener" rel="noreferrer">article</a></p>
+        <p><strong>Donate 0.5 EGLD.</strong></p>
+        <div>Please connect, scan and confirm transaction with xPortal Mobile App.</div>
+        <button class="button" id="button-tx" style="display: none;">Donate!</button>
+        <button class="button" id="button-login-mobile">Connect!</button>
+        <button class="button" id="button-logout" style="display: none;">Disconnect</button>
+        <div id="multiversx-donate-widget-container" class="multiversx-donate-widget-container"></div>
+        <div id="tx-hash" class="tx-hash"></div>
+    </main>
+    <footer>
+        <hr>
+        Elven.js - One file to rule them all! <a href="https://github.com/juliancwirko/elven.js">GitHub</a>
+    </footer>
+    <script type="module">
+        import "./elven-init.js";
+    </script>
+</body>
+
+</html>
