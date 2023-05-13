@@ -4,7 +4,7 @@ import {
   Transaction,
   Address,
   TransactionPayload,
-  TokenPayment,
+  TokenTransfer,
 } from "elven.js";
 
 // UI states helper
@@ -131,7 +131,7 @@ document.getElementById("button-tx").addEventListener("click", async () => {
     gasLimit: 50000 + 1500 * demoMessage.length,
     chainID: "D",
     data: new TransactionPayload(demoMessage),
-    value: TokenPayment.egldFromAmount(donatePrice),
+    value: TokenTransfer.egldFromAmount(donatePrice),
     sender: new Address(ElvenJS.storage.get("address")),
   });
 
